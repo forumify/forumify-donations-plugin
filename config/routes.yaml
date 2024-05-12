@@ -1,0 +1,5 @@
+forum:
+    resource: ../src/Forum/Controller
+    type: attribute
+    prefix: donations/
+    name_prefix: donations_
