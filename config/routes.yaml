@@ -3,3 +3,9 @@ forum:
     type: attribute
     prefix: donations/
     name_prefix: donations_
+
+admin:
+    resource: ../src/Admin/Controller
+    type: attribute
+    prefix: admin/donations/
+    name_prefix: donations_admin_

@@ -1,0 +1,25 @@
+{% extends '@Forumify/frontend/base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+{% endblock %}
+{% block body %}
+    {% embed '@Forumify/components/tabs.html.twig' %}
+        {% block tabs %}
+            <button type="button" class="btn-link" data-tab-id="goals">{{ 'donations.forum.tabs.goals'|trans }}</button>
+            <button type="button" class="btn-link" data-tab-id="top-donors">{{ 'donations.forum.tabs.donors'|trans }}</button>
+            <button type="button" class="btn-link" data-tab-id="history">{{ 'donations.forum.tabs.history'|trans }}</button>
+        {% endblock %}
+        {% block tabpanels %}
+            <div id="goals">
+                {{ component('Forumify\\Donations\\DonationGoalList') }}
+            </div>
+            <div id="top-donors">
+                {{ component('Forumify\\Donations\\TopDonors') }}
+            </div>
+            <div id="history">
+                {{ component('Forumify\\Donations\\DonationGoalHistoryList') }}
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

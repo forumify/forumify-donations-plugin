@@ -1,0 +1,43 @@
+{% set donors = this.topDonors %}
+{% if donors|length == 3 %}
+    <div class="flex gap-6">
+        <div class="w-30 pt-6 pb-6">
+            {% if donors[1] is defined and donors[1].user is not null %}
+                {% include '@ForumifyDonationsPlugin/forum/components/top_donor.html.twig' with {
+                    donor: donors[1],
+                    pos: 2,
+                    posColor: 'silver',
+                    posSize: '2rem',
+                    textSize: 'text-large'
+                } only %}
+            {% endif %}
+        </div>
+        <div class="w-40">
+            {% if donors[0] is defined and donors[0].user is not null %}
+                {% include '@ForumifyDonationsPlugin/forum/components/top_donor.html.twig' with {
+                    donor: donors[0],
+                    pos: 1,
+                    posColor: 'gold',
+                    posSize: '3rem',
+                    textSize: 'text-huge',
+                    usernameSize: 'text-large'
+                } only %}
+            {% endif %}
+        </div>
+        <div class="w-30 pt-6 pb-6">
+            {% if donors[2] is defined and donors[2].user is not null %}
+                {% include '@ForumifyDonationsPlugin/forum/components/top_donor.html.twig' with {
+                    donor: donors[2],
+                    pos: 3,
+                    posColor: 'brown',
+                    posSize: '2rem',
+                    textSize: 'text-large'
+                } only %}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+<div class="mt-6">
+    <h2>{{ 'donations.forum.donations.recent-donations'|trans }}</h2>
+    {{ component('Forumify\\Donations\\DonationList') }}
+</div>

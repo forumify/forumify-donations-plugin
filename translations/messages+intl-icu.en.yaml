@@ -1,0 +1,29 @@
+donations:
+    forum:
+        tabs:
+            goals: 'Current Goals'
+            donors: 'Donors'
+            history: 'History'
+        goal:
+            amount: 'Raised {amount}'
+            goal: 'of {goal} goal'
+            state:
+                before-start: 'This goal is not open yet.'
+                after-end: 'This goal has expired.'
+                goal-reached: 'The goal has been reached.'
+            goals: 'All goals'
+        donations:
+            recent-donations: 'Recent Donations'
+            list-item: '{avatar} {username} donated {amount} to {goal}'
+    admin:
+        settings:
+            title: 'Donations Settings'
+            saved: 'Donation plugin settings saved'
+        donation_goal:
+            crud:
+                single: 'donation goal'
+                plural: 'donation goals'
+        donation:
+            crud:
+                single: 'donation'
+                plural: 'donations'

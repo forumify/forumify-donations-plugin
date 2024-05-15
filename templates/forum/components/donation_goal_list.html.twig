@@ -1,0 +1,25 @@
+{% extends '@Forumify/components/list.html.twig' %}
+{% block row %}
+    <li class="flex {% if not loop.first %}mt-6{% endif %}">
+        <div class="w-75">
+            <a href="{{ path('donations_goal', { slug: item.slug }) }}">
+                <h2>{{ item.title }}</h2>
+            </a>
+            {% include '@ForumifyDonationsPlugin/forum/components/progress.html.twig' with {
+                value: item.amount,
+                maximum: item.goal
+            } %}
+        </div>
+        <div class="w-25 flex flex-col justify-center items-center">
+            {% set state = item.state %}
+            {% if state is constant('Forumify\\Donations\\Entity\\DonationGoal::STATE_OPEN') %}
+                {% include '@ForumifyDonationsPlugin/forum/components/paypal_donate_button.html.twig' with { goal: item } only %}
+            {% else %}
+                <i class="ph ph-lock" style="font-size: 48px"></i>
+                <span class="text-small">
+                    {{ ('donations.forum.goal.state.' ~ state)|trans }}
+                </span>
+            {% endif %}
+        </div>
+    </li>
+{% endblock %}

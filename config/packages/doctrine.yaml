@@ -1,0 +1,9 @@
+doctrine:
+    orm:
+        mappings:
+            donations:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/vendor/forumify/forumify-donations-plugin/src/Entity'
+                prefix: Forumify\Donations\Entity
+                alias: DonationsEntity

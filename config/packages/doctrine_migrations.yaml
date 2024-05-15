@@ -1,0 +1,3 @@
+doctrine_migrations:
+    migrations_paths:
+        'ForumifyDonationsPluginMigrations': '%kernel.project_dir%/vendor/forumify/forumify-donations-plugin/migrations'

@@ -15,7 +15,8 @@ class ForumifyDonationsPlugin extends AbstractForumifyPlugin
             'Donations',
             'forumify',
             'Accept donations from your community members.',
-            'https://forumify.net'
+            'https://forumify.net',
+            'donations_admin_settings'
         );
     }
 }

@@ -1,0 +1,15 @@
+<div class="box flex flex-col items-center justify-center">
+    <span class="text-black mb-2" style="font-size: {{ posSize }}; color: {{ posColor }}; text-shadow: {{ posColor }} 1px 0 6px;">{{ pos }}</span>
+    {% include '@Forumify/components/avatar.html.twig' with {
+        user: donor.user,
+    } %}
+    <p class="{{ usernameSize|default('') }}">
+        {% include '@Forumify/components/username.html.twig' with {
+            user: donor.user
+        } %}
+    </p>
+    <p class="text-small mt-4">Total</p>
+    <p class="{{ textSize }} text-black">{{ (donor.donationTotal / 100)|currency }}</p>
+    <p class="text-small mt-2">Donations</p>
+    <p class="{{ textSize}} text-black">{{ donor.donationCount }}</p>
+</div>

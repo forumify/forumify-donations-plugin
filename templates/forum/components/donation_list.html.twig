@@ -1,0 +1,27 @@
+{% extends '@Forumify/components/list.html.twig' %}
+{% block row %}
+    <li class="w-100 {% if not loop.first %}mt-3{% endif %}">
+        {% set user = item.user %}
+        {% set avatar %}
+            {% include '@Forumify/components/avatar.html.twig' with { className: 'avatar-sm' } %}
+        {% endset %}
+        {% set username %}
+            {% include '@Forumify/components/username.html.twig' %}
+        {% endset %}
+        {% set amount %}
+            <span class="text-bold">{{ item.amount|currency }}</span>
+        {% endset %}
+        {% set goal %}
+            <a href="{{ path('donations_goal', { slug: item.goal.slug }) }}">{{ item.goal.title }}</a>
+        {% endset %}
+        <p class="flex items-center gap-1">
+            {{ 'donations.forum.donations.list-item'|trans({
+                avatar: avatar,
+                username: username,
+                amount: amount,
+                goal: goal
+            })|raw }}
+        </p>
+        <p class="text-small">{{ 'date_time_short'|trans({ date: item.createdAt }) }}</p>
+    </li>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends '@Forumify/frontend/base.html.twig' %}
+{% block title_page %}
+    {{ goal.title }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+{% endblock %}
+{% block body %}
+    <p class="text-small mb-4">
+        <a href="{{ path('donations_dashboard') }}">{{ 'donations.forum.goal.goals'|trans }}</a>
+        >
+        {{ goal.title }}
+    </p>
+    <div class="mb-6">
+        <h1>{{ goal.title }}</h1>
+        <div style="float: right; width: 300px">
+            <div class="mt-6">
+                {% include '@ForumifyDonationsPlugin/forum/components/progress.html.twig' with {
+                    value: goal.amount,
+                    maximum: goal.goal
+                } %}
+            </div>
+            <div class="flex flex-col justify-center items-center mt-6 mb-4">
+                {% set state = goal.state %}
+                {% if state is constant('Forumify\\Donations\\Entity\\DonationGoal::STATE_OPEN') %}
+                    {% include '@ForumifyDonationsPlugin/forum/components/paypal_donate_button.html.twig' %}
+                {% else %}
+                    <i class="ph ph-lock" style="font-size: 48px"></i>
+                    <p class="text-small">
+                        {{ ('donations.forum.goal.state.' ~ state)|trans }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        <div style="min-height: 150px;">
+            {{ goal.description|rich }}
+        </div>
+    </div>
+    <div>
+        <h2>{{ 'donations.forum.donations.recent-donations'|trans }}</h2>
+        {{ component('Forumify\\Donations\\DonationList', { goalId: goal.id }) }}
+    </div>
+{% endblock %}

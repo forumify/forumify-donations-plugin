@@ -1,0 +1,10 @@
+<div {{ stimulus_controller('forumify/forumify-donations-plugin/paypal_donate_button', {
+    hostedButtonId: goal.paypalButtonId|default(setting('donations.paypal_button_id')),
+    onCompleteCallback: path('donations_donate', { slug: goal.slug }),
+    dev: setting('donations.paypal_dev_mode'),
+}) }}>
+    <div
+        id="btn-{{ random() }}"
+        {{ stimulus_target('forumify/forumify-donations-plugin/paypal_donate_button', 'buttonContainer') }}
+    ></div>
+</div>

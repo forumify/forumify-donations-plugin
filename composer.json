@@ -2,6 +2,7 @@
     "name": "forumify/forumify-donations-plugin",
     "description": "Accept donations from your community",
     "type": "forumify-plugin",
+    "keywords": ["symfony-ux"],
     "license": "OSL-3.0",
     "autoload": {
         "psr-4": {
