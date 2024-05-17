@@ -20,8 +20,6 @@ class PreferredGoal
 
     public function getPreferredGoal(): ?DonationGoal
     {
-        return $this->donationGoalRepository->findOneBy(['slug' => 'upgrade-server-hardware']);
-
         $activeGoals = $this->donationGoalRepository->findActiveGoals();
 
         $lowestProgressGoal = null;
