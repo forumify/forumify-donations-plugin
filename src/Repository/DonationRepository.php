@@ -6,6 +6,7 @@ namespace Forumify\Donations\Repository;
 
 use Forumify\Core\Repository\AbstractRepository;
 use Forumify\Donations\Entity\Donation;
+use Forumify\Donations\Entity\DonationGoal;
 
 class DonationRepository extends AbstractRepository
 {
@@ -31,5 +32,18 @@ class DonationRepository extends AbstractRepository
         return $query
             ->getQuery()
             ->getResult();
+    }
+
+    public function getDonationAmount(DonationGoal $goal): float
+    {
+        $amount = $this->createQueryBuilder('d')
+            ->select('SUM(d.amount)')
+            ->where('d.goal = :goal')
+            ->groupBy('d.goal')
+            ->setParameter('goal', $goal->getId())
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $amount / 100;
     }
 }

@@ -5,9 +5,8 @@
             <a href="{{ path('donations_goal', { slug: item.slug }) }}">
                 <h2>{{ item.title }}</h2>
             </a>
-            {% include '@ForumifyDonationsPlugin/forum/components/progress.html.twig' with {
-                value: item.amount,
-                maximum: item.goal
+            {% include '@ForumifyDonationsPlugin/forum/components/goal_progress.html.twig' with {
+                goal: item
             } %}
         </div>
         <div class="w-25 flex flex-col justify-center items-center">

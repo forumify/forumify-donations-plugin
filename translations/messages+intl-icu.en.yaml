@@ -15,6 +15,11 @@ donations:
         donations:
             recent-donations: 'Recent Donations'
             list-item: '{avatar} {username} donated {amount} to {goal}'
+        preferred_goal:
+            title: 'Donation Goal'
+            view_goal: 'View Goal'
+            no_goal: 'There are no ongoing donation goals.'
+            view_all: 'View All Goals'
     admin:
         settings:
             title: 'Donations Settings'

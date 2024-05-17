@@ -1,13 +1,15 @@
+{% set donationRepo = repository('Forumify\\Donations\\Entity\\Donation') %}
+{% set amount = goal.amount %}
 <div class="flex justify-between mb-2 pl-2 pr-2">
     <span class="text-small text-bold">
-        {{ 'donations.forum.goal.amount'|trans({ amount: value|currency }) }}
+        {{ 'donations.forum.goal.amount'|trans({ amount: amount|currency }) }}
     </span>
     <span class="text-small">
-        {{ 'donations.forum.goal.goal'|trans({ goal: maximum|currency }) }}
+        {{ 'donations.forum.goal.goal'|trans({ goal: goal.goal|currency }) }}
     </span>
 </div>
 <div class="progress">
-    {% set perc = value / maximum * 100 %}
+    {% set perc = amount / goal.goal * 100 %}
     <div class="progress-bar flex justify-end items-center text-small text-bold pr-2" style="width: {{ min(perc, 100) }}%">
         {{ perc|number_format() }}%
     </div>

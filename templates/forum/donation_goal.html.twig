@@ -16,10 +16,7 @@
         <h1>{{ goal.title }}</h1>
         <div style="float: right; width: 300px">
             <div class="mt-6">
-                {% include '@ForumifyDonationsPlugin/forum/components/progress.html.twig' with {
-                    value: goal.amount,
-                    maximum: goal.goal
-                } %}
+                {% include '@ForumifyDonationsPlugin/forum/components/goal_progress.html.twig' %}
             </div>
             <div class="flex flex-col justify-center items-center mt-6 mb-4">
                 {% set state = goal.state %}
