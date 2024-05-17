@@ -7,7 +7,7 @@
         {% if goal is not null %}
             <p class="text-bold mb-2">{{ goal.title }}</p>
             <p class="mb-4">
-                {{ goal.description|striptags|u.truncate(200, '...', false) }}
+                {{ goal.description|striptags|u.truncate(200, '...', false)|raw }}
             </p>
             {% include '@ForumifyDonationsPlugin/forum/components/goal_progress.html.twig' %}
             <div class="text-center">
