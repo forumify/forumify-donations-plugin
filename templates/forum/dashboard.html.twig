@@ -18,7 +18,10 @@
                 {{ component('Forumify\\Donations\\TopDonors') }}
             </div>
             <div id="history">
-                {{ component('Forumify\\Donations\\DonationGoalHistoryList') }}
+                <h2>{{ 'donations.forum.history.recent_goals'|trans }}</h2>
+                {{ component('Forumify\\Donations\\DonationGoalHistoryList',{ size: 5 } ) }}
+                <h2 class="mt-6">{{ 'donations.forum.history.recent_donations'|trans }}</h2>
+                {{ component('Forumify\\Donations\\DonationList') }}
             </div>
         {% endblock %}
     {% endembed %}

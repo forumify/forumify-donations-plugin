@@ -13,13 +13,22 @@ donations:
                 goal-reached: 'The goal has been reached.'
             goals: 'All goals'
         donations:
-            recent-donations: 'Recent Donations'
-            list-item: '{avatar} {username} donated {amount} to {goal}'
+            list_item: >-
+                {goal, select,
+                    no_goal {{avatar} {username} donated {amount}}
+                    other   {{avatar} {username} donated {amount} to {goal}}
+                }
+            anonymous: 'Anonymous'
+            leaderboard: 'Leaderboard'
+            leaderboard_item: '{avatar} {username} donated {amount} in {count} donations.'
         preferred_goal:
             title: 'Donation Goal'
             view_goal: 'View Goal'
             no_goal: 'There are no ongoing donation goals.'
             view_all: 'View All Goals'
+        history:
+            recent_goals: 'Recent Goals'
+            recent_donations: 'Recent Donations'
     admin:
         settings:
             title: 'Donations Settings'

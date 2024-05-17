@@ -6,16 +6,24 @@
             {% include '@Forumify/components/avatar.html.twig' with { className: 'avatar-sm' } %}
         {% endset %}
         {% set username %}
-            {% include '@Forumify/components/username.html.twig' %}
+            {% if user is not null %}
+                {% include '@Forumify/components/username.html.twig' %}
+            {% else %}
+                {{ 'donations.forum.donations.anonymous'|trans }}
+            {% endif %}
         {% endset %}
         {% set amount %}
             <span class="text-bold">{{ item.amount|currency }}</span>
         {% endset %}
         {% set goal %}
-            <a href="{{ path('donations_goal', { slug: item.goal.slug }) }}">{{ item.goal.title }}</a>
+            {%- if item.goal is not null -%}
+                <a href="{{ path('donations_goal', { slug: item.goal.slug }) }}">{{ item.goal.title }}</a>
+            {%- else -%}
+                no_goal
+            {%- endif -%}
         {% endset %}
         <p class="flex items-center gap-1">
-            {{ 'donations.forum.donations.list-item'|trans({
+            {{ 'donations.forum.donations.list_item'|trans({
                 avatar: avatar,
                 username: username,
                 amount: amount,

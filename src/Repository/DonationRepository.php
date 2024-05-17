@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forumify\Donations\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Forumify\Core\Repository\AbstractRepository;
 use Forumify\Donations\Entity\Donation;
 use Forumify\Donations\Entity\DonationGoal;
@@ -15,7 +16,7 @@ class DonationRepository extends AbstractRepository
         return Donation::class;
     }
 
-    public function getTopDonors(int $limit = null): array
+    public function getTopDonorQuery(int $limit = null): QueryBuilder
     {
         $query = $this
             ->createQueryBuilder('d')
@@ -29,9 +30,7 @@ class DonationRepository extends AbstractRepository
             $query->setMaxResults($limit);
         }
 
-        return $query
-            ->getQuery()
-            ->getResult();
+        return $query;
     }
 
     public function getDonationAmount(DonationGoal $goal): float

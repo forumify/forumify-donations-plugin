@@ -19,7 +19,7 @@ class TopDonors
 
     public function getTopDonors(): array
     {
-        $topDonors = $this->donationRepository->getTopDonors(3);
+        $topDonors = $this->donationRepository->getTopDonorQuery(3)->getQuery()->getResult();
         foreach ($topDonors as &$donor) {
             $donor['user'] = $this->userRepository->find($donor['userId']);
         }

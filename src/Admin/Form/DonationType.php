@@ -33,12 +33,14 @@ class DonationType extends AbstractType
             ->add('user', EntityType::class, [
                 'autocomplete' => true,
                 'placeholder' => '',
+                'required' => false,
                 'class' => User::class,
                 'choice_label' => 'username',
             ])
             ->add('goal', EntityType::class, [
                 'autocomplete' => true,
                 'placeholder' => '',
+                'required' => false,
                 'class' => DonationGoal::class,
                 'choice_label' => 'title',
             ]);

@@ -1,6 +1,6 @@
 {% set donors = this.topDonors %}
 {% if donors|length == 3 %}
-    <div class="flex gap-6">
+    <div class="flex gap-6 hide-phone">
         <div class="w-30 pt-6 pb-6">
             {% if donors[1] is defined and donors[1].user is not null %}
                 {% include '@ForumifyDonationsPlugin/forum/components/top_donor.html.twig' with {
@@ -38,6 +38,6 @@
     </div>
 {% endif %}
 <div class="mt-6">
-    <h2>{{ 'donations.forum.donations.recent-donations'|trans }}</h2>
-    {{ component('Forumify\\Donations\\DonationList') }}
+    <h2>{{ 'donations.forum.donations.leaderboard'|trans }}</h2>
+    {{ component('Forumify\\Donations\\DonationLeaderboard') }}
 </div>

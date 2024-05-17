@@ -1,0 +1,23 @@
+{% extends '@Forumify/components/list.html.twig' %}
+{% block container %}
+    {% include '@Forumify/components/components/pagination.html.twig' with { class: 'mb-2' } %}
+    <div class="flex flex-wrap justify-evenly">
+        {% for item in this.result.data %}
+            <div class="p-2 w-25" style="min-width: 200px">
+                {% include '@ForumifyDonationsPlugin/forum/components/top_donor.html.twig' with {
+                    donor: {
+                        user: this.user(item.userId),
+                        donationTotal: item.donationTotal,
+                        donationCount: item.donationCount,
+                    },
+                    pos: (this.page - 1) * this.size + loop.index,
+                    posSize: '1rem',
+                    posColor: 'var(--c-text-primary)',
+                    textSize: '1rem',
+                    hidePos: true,
+                } %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
