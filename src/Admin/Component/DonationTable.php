@@ -8,7 +8,6 @@ use DateTime;
 use Forumify\Core\Component\Table\AbstractDoctrineTable;
 use Forumify\Core\Entity\User;
 use Forumify\Donations\Entity\Donation;
-use Forumify\Donations\Repository\DonationRepository;
 use Forumify\Donations\Service\CurrencyFormatter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -17,12 +16,15 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 class DonationTable extends AbstractDoctrineTable
 {
     public function __construct(
-        DonationRepository $repository,
         private readonly CurrencyFormatter $currencyFormatter,
         private readonly UrlGeneratorInterface $urlGenerator,
     ) {
-        parent::__construct($repository);
         $this->sort = ['createdAt' => 'DESC'];
+    }
+
+    protected function getEntityClass(): string
+    {
+        return Donation::class;
     }
 
     protected function buildTable(): void

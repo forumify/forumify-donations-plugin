@@ -15,12 +15,15 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 class DonationGoalTable extends AbstractDoctrineTable
 {
     public function __construct(
-        DonationGoalRepository $repository,
         private readonly CurrencyFormatter $currencyFormatter,
         private readonly UrlGeneratorInterface $urlGenerator
     ) {
-        parent::__construct($repository);
         $this->sort = ['from' => 'DESC', 'to' => 'DESC'];
+    }
+
+    protected function getEntityClass(): string
+    {
+        return DonationGoal::class;
     }
 
     protected function buildTable(): void

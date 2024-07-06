@@ -23,9 +23,9 @@ class DonationGoalController extends AbstractCrudController
         return 'Forumify\\Donations\\DonationGoalTable';
     }
 
-    protected function getForm(): FormInterface
+    protected function getForm(?object $data): FormInterface
     {
-        return $this->createForm(DonationGoalType::class);
+        return $this->createForm(DonationGoalType::class, $data);
     }
 
     protected function getTranslationPrefix(): string
