@@ -19,9 +19,9 @@ class DonationsMenuBuilder implements AdminMenuBuilderInterface
     {
         $u = $this->urlGenerator->generate(...);
 
-        $menu->addItem(new Menu('Donations', ['icon' => 'ph ph-currency-dollar'], [
-            new MenuItem('Goals', $u('donations_admin_goals_list'), ['icon' => 'ph ph-target']),
-            new MenuItem('Donations', $u('donations_admin_donations_list'), ['icon' => 'ph ph-currency-dollar'])
+        $menu->addItem(new Menu('Donations', ['icon' => 'ph ph-currency-dollar', 'permission' => 'donations.admin.view'], [
+            new MenuItem('Goals', $u('donations_admin_goals_list'), ['icon' => 'ph ph-target', 'permission' => 'donations.admin.donation_goals.view']),
+            new MenuItem('Donations', $u('donations_admin_donations_list'), ['icon' => 'ph ph-currency-dollar', 'permission' => 'donations.admin.donations.view'])
         ]));
     }
 }

@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('', 'donations')]
 class DonationController extends AbstractCrudController
 {
+    protected ?string $permissionView = 'donations.admin.donations.view';
+    protected ?string $permissionCreate = 'donations.admin.donations.manage';
+    protected ?string $permissionEdit = 'donations.admin.donations.manage';
+    protected ?string $permissionDelete = 'donations.admin.donations.manage';
+
     protected function getEntityClass(): string
     {
         return Donation::class;

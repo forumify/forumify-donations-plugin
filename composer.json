@@ -10,7 +10,7 @@
         }
     },
     "require": {
-        "forumify/forumify-platform": "*"
+        "forumify/forumify-platform": "^0.2.21"
     },
     "config": {
         "allow-plugins": {

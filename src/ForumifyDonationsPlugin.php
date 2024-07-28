@@ -19,4 +19,21 @@ class ForumifyDonationsPlugin extends AbstractForumifyPlugin
             'donations_admin_settings'
         );
     }
+
+    public function getPermissions(): array
+    {
+        return [
+            'admin' => [
+                'view',
+                'donations' => [
+                    'view',
+                    'manage',
+                ],
+                'donation_goals' => [
+                    'view',
+                    'manage',
+                ],
+            ],
+        ];
+    }
 }

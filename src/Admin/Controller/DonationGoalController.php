@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('goals', 'goals')]
 class DonationGoalController extends AbstractCrudController
 {
+    protected ?string $permissionView = 'donations.admin.donation_goals.view';
+    protected ?string $permissionCreate = 'donations.admin.donation_goals.manage';
+    protected ?string $permissionEdit = 'donations.admin.donation_goals.manage';
+    protected ?string $permissionDelete = 'donations.admin.donation_goals.manage';
+
     protected function getEntityClass(): string
     {
         return DonationGoal::class;
