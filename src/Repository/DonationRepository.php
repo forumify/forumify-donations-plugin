@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forumify\Donations\Repository;
 
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Forumify\Core\Repository\AbstractRepository;
 use Forumify\Donations\Entity\Donation;
@@ -35,14 +36,18 @@ class DonationRepository extends AbstractRepository
 
     public function getDonationAmount(DonationGoal $goal): float
     {
-        $amount = $this->createQueryBuilder('d')
-            ->select('SUM(d.amount)')
-            ->where('d.goal = :goal')
-            ->groupBy('d.goal')
-            ->setParameter('goal', $goal->getId())
-            ->getQuery()
-            ->getSingleScalarResult();
+        try {
+            $amount = $this->createQueryBuilder('d')
+                ->select('SUM(d.amount)')
+                ->where('d.goal = :goal')
+                ->groupBy('d.goal')
+                ->setParameter('goal', $goal->getId())
+                ->getQuery()
+                ->getSingleScalarResult();
 
-        return $amount / 100;
+            return $amount / 100;
+        } catch (NoResultException) {
+            return 0;
+        }
     }
 }
