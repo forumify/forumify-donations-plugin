@@ -30,6 +30,6 @@
                 goal: goal
             })|raw }}
         </p>
-        <p class="text-small">{{ 'date_time_short'|trans({ date: item.createdAt }) }}</p>
+        <p class="text-small">{{ item.createdAt|format_date }}</p>
     </li>
 {% endblock %}
