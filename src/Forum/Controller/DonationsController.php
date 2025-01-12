@@ -7,12 +7,14 @@ namespace Forumify\Donations\Forum\Controller;
 use Forumify\Donations\Entity\Donation;
 use Forumify\Donations\Entity\DonationGoal;
 use Forumify\Donations\Repository\DonationRepository;
+use Forumify\Plugin\Attribute\PluginVersion;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[PluginVersion('forumify/forumify-donations-plugin', 'regular')]
 class DonationsController extends AbstractController
 {
     #[Route('', 'dashboard')]
