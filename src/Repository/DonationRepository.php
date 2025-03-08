@@ -17,7 +17,7 @@ class DonationRepository extends AbstractRepository
         return Donation::class;
     }
 
-    public function getTopDonorQuery(int $limit = null): QueryBuilder
+    public function getTopDonorQuery(?int $limit = null): QueryBuilder
     {
         $query = $this
             ->createQueryBuilder('d')
