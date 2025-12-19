@@ -28,10 +28,12 @@ class PreferredGoal
             $amount = $this->donationRepository->getDonationAmount($goal);
 
             $progress = $amount / $goal->getGoal();
-            if ($progress < $lowestProgress) {
-                $lowestProgressGoal = $goal;
-                $lowestProgress = $progress;
+            if ($progress >= $lowestProgress) {
+                continue;
             }
+
+            $lowestProgressGoal = $goal;
+            $lowestProgress = $progress;
         }
 
         return $lowestProgressGoal;

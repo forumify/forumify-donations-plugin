@@ -49,7 +49,7 @@ class DonationGoal
     #[ORM\Column(name: '`to`', type: 'date', nullable: true)]
     private ?DateTime $to = null;
 
-    /** @var Collection<Donation> */
+    /** @var Collection<int, Donation> */
     #[ORM\OneToMany(mappedBy: 'goal', targetEntity: Donation::class)]
     private Collection $donations;
 
@@ -129,7 +129,7 @@ class DonationGoal
     }
 
     /**
-     * @return Collection<Donation>
+     * @return Collection<int, Donation>
      */
     public function getDonations(): Collection
     {
@@ -137,7 +137,7 @@ class DonationGoal
     }
 
     /**
-     * @param Collection<Donation>|array<Donation> $donations
+     * @param Collection<int, Donation>|array<Donation> $donations
      */
     public function setDonations(Collection|array $donations): void
     {

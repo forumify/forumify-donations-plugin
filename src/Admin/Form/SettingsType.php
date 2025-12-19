@@ -7,11 +7,13 @@ namespace Forumify\Donations\Admin\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Intl\Currencies;
 
+/**
+ * @extends AbstractType<array<string, mixed>>
+ */
 class SettingsType extends AbstractType
 {
     private const SUPPORTED_CURRENCIES = [
@@ -22,7 +24,7 @@ class SettingsType extends AbstractType
         'AUD',
     ];
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('donations__currency', ChoiceType::class, [
@@ -46,6 +48,9 @@ class SettingsType extends AbstractType
             ]);
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function getCurrencyOptions(): array
     {
         $choices = [];

@@ -8,9 +8,13 @@ use Doctrine\ORM\QueryBuilder;
 use Forumify\Core\Component\List\AbstractDoctrineList;
 use Forumify\Core\Entity\User;
 use Forumify\Core\Repository\UserRepository;
+use Forumify\Donations\Entity\Donation;
 use Forumify\Donations\Repository\DonationRepository;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
+/**
+ * @extends AbstractDoctrineList<Donation>
+ */
 #[AsLiveComponent('Forumify\Donations\DonationLeaderboard', '@ForumifyDonationsPlugin/forum/components/donation_leaderboard.html.twig')]
 class DonationLeaderboard extends AbstractDoctrineList
 {
@@ -18,7 +22,12 @@ class DonationLeaderboard extends AbstractDoctrineList
         private readonly DonationRepository $donationRepository,
         private readonly UserRepository $userRepository,
     ) {
-        $this->size = 12;
+        $this->limit = 12;
+    }
+
+    protected function getEntityClass(): string
+    {
+        return Donation::class;
     }
 
     public function getUser(int $id): ?User
@@ -26,13 +35,14 @@ class DonationLeaderboard extends AbstractDoctrineList
         return $this->userRepository->find($id);
     }
 
-    protected function getQueryBuilder(): QueryBuilder
+    protected function getQuery(): QueryBuilder
     {
         return $this->donationRepository->getTopDonorQuery();
     }
 
-    protected function getCount(): int
+    protected function getTotalCount(): int
     {
+        /** @var string $subQuery */
         $subQuery = $this->donationRepository->getTopDonorQuery()->getQuery()->getSQL();
 
         return $this->donationRepository

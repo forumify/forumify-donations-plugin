@@ -10,7 +10,9 @@ use Twig\TwigFilter;
 
 class CurrencyExtension extends AbstractExtension
 {
-    public function __construct(private readonly CurrencyFormatter $currencyFormatter) { }
+    public function __construct(private readonly CurrencyFormatter $currencyFormatter)
+    {
+    }
 
     public function getFilters(): array
     {

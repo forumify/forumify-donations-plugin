@@ -6,7 +6,6 @@ namespace Forumify\Donations\Admin\Component;
 
 use Forumify\Core\Component\Table\AbstractDoctrineTable;
 use Forumify\Donations\Entity\DonationGoal;
-use Forumify\Donations\Repository\DonationGoalRepository;
 use Forumify\Donations\Service\CurrencyFormatter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;

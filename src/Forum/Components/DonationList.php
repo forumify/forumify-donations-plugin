@@ -6,24 +6,27 @@ namespace Forumify\Donations\Forum\Components;
 
 use Doctrine\ORM\QueryBuilder;
 use Forumify\Core\Component\List\AbstractDoctrineList;
-use Forumify\Donations\Repository\DonationRepository;
+use Forumify\Donations\Entity\Donation;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 
+/**
+ * @extends AbstractDoctrineList<Donation>
+ */
 #[AsLiveComponent('Forumify\Donations\DonationList', '@ForumifyDonationsPlugin/forum/components/donation_list.html.twig')]
 class DonationList extends AbstractDoctrineList
 {
     #[LiveProp]
     public ?int $goalId = null;
 
-    public function __construct(
-        private readonly DonationRepository $donationRepository,
-    ) {
+    protected function getEntityClass(): string
+    {
+        return Donation::class;
     }
 
-    protected function getQueryBuilder(): QueryBuilder
+    protected function getQuery(): QueryBuilder
     {
-        $qb = $this->donationRepository->createQueryBuilder('d')
+        $qb = $this->repository->createQueryBuilder('d')
             ->orderBy('d.createdAt', 'DESC');
 
         if ($this->goalId !== null) {
@@ -31,12 +34,5 @@ class DonationList extends AbstractDoctrineList
         }
 
         return $qb;
-    }
-
-    protected function getCount(): int
-    {
-        return $this->donationRepository->count($this->goalId === null
-            ? []
-            : ['goal' => $this->goalId]);
     }
 }

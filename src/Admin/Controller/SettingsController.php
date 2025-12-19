@@ -27,7 +27,7 @@ class SettingsController extends AbstractController
         }
 
         return $this->render('@ForumifyDonationsPlugin/admin/settings.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

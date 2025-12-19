@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forumify\Donations\Forum\Controller;
 
+use Forumify\Core\Entity\User;
 use Forumify\Donations\Entity\Donation;
 use Forumify\Donations\Entity\DonationGoal;
 use Forumify\Donations\Repository\DonationRepository;
@@ -23,7 +24,7 @@ class DonationsController extends AbstractController
         return $this->render('@ForumifyDonationsPlugin/forum/dashboard.html.twig');
     }
 
-    #[Route('/goal/{slug}', 'goal')]
+    #[Route('/goal/{slug:goal}', 'goal')]
     public function goal(DonationGoal $goal): Response
     {
         return $this->render('@ForumifyDonationsPlugin/forum/donation_goal.html.twig', [
@@ -31,16 +32,21 @@ class DonationsController extends AbstractController
         ]);
     }
 
-    #[Route('/goal/{slug}/donate', 'donate', methods: ['POST'])]
+    #[Route('/goal/{slug:goal}/donate', 'donate', methods: ['POST'])]
     public function donate(Request $request, DonationGoal $goal, DonationRepository $donationRepository): Response
     {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException();
+        }
+
         $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
         $data['source'] = 'PayPal donate button';
 
         $donation = new Donation();
         $donation->setTransactionId($data['tx']);
         $donation->setAmount((float)$data['amt']);
-        $donation->setUser($this->getUser());
+        $donation->setUser($user);
         $donation->setGoal($goal);
         $donation->setPayload($data);
 

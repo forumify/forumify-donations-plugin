@@ -22,7 +22,7 @@ class CurrencyFormatter
             $symbol = Currencies::getSymbol($currency);
             $fractionDigits = Currencies::getFractionDigits($currency);
             return $symbol . ' ' . number_format($amount, $fractionDigits);
-        } catch (MissingResourceException $ex) {
+        } catch (MissingResourceException) {
             return number_format($amount, 2);
         }
     }

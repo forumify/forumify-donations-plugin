@@ -8,6 +8,9 @@ use DateTime;
 use Forumify\Core\Repository\AbstractRepository;
 use Forumify\Donations\Entity\DonationGoal;
 
+/**
+ * @extends AbstractRepository<DonationGoal>
+ */
 class DonationGoalRepository extends AbstractRepository
 {
     public static function getEntityClass(): string

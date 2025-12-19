@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<Donation>
+ */
 class DonationType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
@@ -27,7 +30,7 @@ class DonationType extends AbstractType
         $builder
             ->add('transactionId', TextType::class, [
                 'required' => false,
-                'help' => 'Transaction ID from PayPal. This field is optional in case you want to record outside donations.'
+                'help' => 'Transaction ID from PayPal. This field is optional in case you want to record outside donations.',
             ])
             ->add('amount')
             ->add('user', EntityType::class, [

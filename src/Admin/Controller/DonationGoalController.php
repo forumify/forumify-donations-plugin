@@ -11,8 +11,11 @@ use Forumify\Plugin\Attribute\PluginVersion;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('goals', 'goals')]
+/**
+ * @extends AbstractCrudController<DonationGoal>
+ */
 #[PluginVersion('forumify/forumify-donations-plugin', 'regular')]
+#[Route('goals', 'goals')]
 class DonationGoalController extends AbstractCrudController
 {
     protected ?string $permissionView = 'donations.admin.donation_goals.view';

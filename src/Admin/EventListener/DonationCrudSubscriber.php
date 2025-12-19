@@ -13,14 +13,17 @@ class DonationCrudSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            PreSaveCrudEvent::getName(Donation::class) => 'onDonationPreSave'
+            PreSaveCrudEvent::getName(Donation::class) => 'onDonationPreSave',
         ];
     }
 
+    /**
+     * @param PreSaveCrudEvent<Donation> $event
+     */
     public function onDonationPreSave(PreSaveCrudEvent $event): void
     {
         $donation = $event->getEntity();
-        if (!$donation instanceof Donation || !$event->isNew()) {
+        if (!$event->isNew()) {
             return;
         }
 

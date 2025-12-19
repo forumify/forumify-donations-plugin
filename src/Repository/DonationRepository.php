@@ -10,6 +10,9 @@ use Forumify\Core\Repository\AbstractRepository;
 use Forumify\Donations\Entity\Donation;
 use Forumify\Donations\Entity\DonationGoal;
 
+/**
+ * @extends AbstractRepository<Donation>
+ */
 class DonationRepository extends AbstractRepository
 {
     public static function getEntityClass(): string
@@ -37,17 +40,17 @@ class DonationRepository extends AbstractRepository
     public function getDonationAmount(DonationGoal $goal): float
     {
         try {
-            $amount = $this->createQueryBuilder('d')
+            $amount = (float)($this->createQueryBuilder('d')
                 ->select('SUM(d.amount)')
                 ->where('d.goal = :goal')
                 ->groupBy('d.goal')
                 ->setParameter('goal', $goal->getId())
                 ->getQuery()
-                ->getSingleScalarResult();
+                ->getSingleScalarResult() ?? 0.0);
 
             return $amount / 100;
         } catch (NoResultException) {
-            return 0;
+            return 0.0;
         }
     }
 }
